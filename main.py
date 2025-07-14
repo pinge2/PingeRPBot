@@ -1,4 +1,4 @@
-import telebbot as tb
+import telebot as tb
 import os
 
 
@@ -30,10 +30,10 @@ def registry_user(msg):
 	users[user_id] = {
 	"Имя": user_name,
 	"Здоровье": 100,
-	"Сила": 1,
+	"Сила": 0,
 	"Мана": 100,
-	"Выносливость": 1,
-	"Стойкость": 1,
+	"Выносливость": 0,
+	"Стойкость": 0,
 	"Время оглушения": 0,
 	"Время возрождения": 0,
 	"Суперспособность": random.randint(0, 8)
@@ -66,6 +66,7 @@ def pushup_arms(msg):
 	users[user_id]["Выносливость"] += 0.1
 	
 	fmt = f"\n\nСила удара: {users[user_id]['Сила']} (+0.5 за тренировку)"
+	fmt += f"\n\t- **{20 + users[user_id]['Сила'] * 2} урон от удара**"
 	fmt += f"\nТекущая мана: {users[user_id]['Мана']} (-25 за тренировку)"
 	fmt += f"\nВыносливость: {users[user_id]['Выносливость']} (+0.1 за тренировку)"
 	
@@ -74,17 +75,17 @@ def pushup_arms(msg):
 
 
 @bot.message_handler(commands=["*качать пресс*"])
-def pushup_arms(msg):
+def pushup_stomach(msg):
 	chat_id = msg.chat.id
 	user_id = msg.reply_to_message.from_user.id
 	
-	users[user_id]["Сила"] += 0.5
+	users[user_id]["Стойкость"] += 0.5
 	users[user_id]["Мана"] -= 25
 	users[user_id]["Выносливость"] += 0.1
-<------>
-	fmt = f"\n\nСила удара: {users[user_id]['Сила']
-	fmt += f"\nТекущая мана: {users[user_id]['Мана'
-<------>fmt += f"\nВыносливость: {users[user_id]['Вынос
-<------>
-<------>bot.reply_to(msg, f"{users[user_id]['Имя']}, вы
-
+	
+	fmt = f"\n\nСтойкость: {users[user_id]['Стойкость']} (+0.5 за тренировку)"
+	fmt += f"\n\t- **{100 + users[user_id]["Стойкость"] * 5} макс. здоровье**"
+	fmt += f"\nТекущая мана: {users[user_id]['Мана']} (-25 за тренировку)"
+	fmt += f"\nВыносливость: {users[user_id]['Выносливость']} (+0.1 за тренировку)"
+	
+	bot.reply_to(msg, f"{users[user_id]['Имя']}, вы накачали руки и усилили свои удары!" + fmt)
