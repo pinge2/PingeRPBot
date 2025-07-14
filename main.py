@@ -88,4 +88,4 @@ def pushup_stomach(msg):
 	fmt += f"\nТекущая мана: {users[user_id]['Мана']} (-25 за тренировку)"
 	fmt += f"\nВыносливость: {users[user_id]['Выносливость']} (+0.1 за тренировку)"
 	
-	bot.reply_to(msg, f"{users[user_id]['Имя']}, вы накачали руки и усилили свои удары!" + fmt)
+	bot.reply_to(msg, f"{users[user_id]['Имя']}, вы накачали пресс и стали более стойким!" + fmt)
